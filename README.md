@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-[test wallet](http://connectmetamask.surge.sh/)
+## [test wallet](http://connectmetamask.surge.sh/)
 
 ## Available Scripts
 
