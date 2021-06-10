@@ -25,18 +25,14 @@ jobs:
       uses: actions/setup-node@v2-beta
       with:
         version: 12 
-
-    - uses: borales/actions-yarn@v2.0.0
-      with:
-        cmd: install 
-
+        
      # Installs dependencies
     - name: Installs all dependencies
-      run: yarn install
+      run: npm install
 
     # Builds the App
     - name: Build React App
-      run: yarn build
+      run: npm run build
 
     # Installs Surge
     - name: Install surge
