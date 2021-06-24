@@ -2,6 +2,10 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## [test wallet](http://connectmetamask.surge.sh/)
+
+## Library link [web3-react](https://github.com/NoahZinsmeister/web3-react)
+
 ## Available Scripts
 
 In the project directory, you can run:
