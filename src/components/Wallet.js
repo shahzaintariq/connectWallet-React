@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useWeb3React } from '@web3-react/core';
 import { metaMask } from '../connectors';
 import { formatEther } from '@ethersproject/units';
+import { useEagerConnect, useInactiveListener } from '../hooks/connect';
 
 const Wallet = () => {
   const {
@@ -22,6 +23,12 @@ const Wallet = () => {
   let connected = connector === metaMask;
   const disabled = !!activatingConnector || connected || !!error;
 
+  // handle logic to eagerly connect to the injected ethereum provider, if it exists and has granted access already
+  const triedEager = useEagerConnect();
+
+  // handle logic to connect in reaction to certain events on the injected ethereum provider, if it exists
+  useInactiveListener(!triedEager || !!activatingConnector);
+
   useEffect(() => {
     if (activatingConnector && activatingConnector === connector) {
       setActivatingConnector(undefined);
@@ -29,7 +36,6 @@ const Wallet = () => {
   }, [activatingConnector, connector]);
 
   useEffect(() => {
-    console.log(library);
     if (library) {
       library.getBlockNumber().then((bn) => {
         setBlockNumber(bn);
@@ -43,10 +49,8 @@ const Wallet = () => {
   }, [library]);
 
   useEffect(() => {
-    console.log('running');
     if (library && account) {
       let stale = false;
-
       library
         .getBalance(account)
         .then((balance) => {
@@ -67,7 +71,7 @@ const Wallet = () => {
     }
   }, [library, account, chainId]);
 
-  const onClickActivate = () => {
+  const onClickActivate = async () => {
     activate(metaMask);
     setActivatingConnector(metaMask);
   };
@@ -165,8 +169,7 @@ const Wallet = () => {
             color: 'black',
             margin: '0 0 0 1rem',
           }}
-        >
-        </div>
+        ></div>
         {'Connect MetaMask'}
       </button>
 
