@@ -3,6 +3,7 @@ import { useWeb3React } from '@web3-react/core';
 
 import { metaMask } from '../connectors';
 
+// this hook will check if wallet is already connected or not
 export function useEagerConnect() {
   const { activate, active } = useWeb3React();
 
@@ -30,6 +31,7 @@ export function useEagerConnect() {
   return tried;
 }
 
+//this hook will handle account and chain changes in wallet
 export function useInactiveListener(suppress = false) {
   const { active, error, activate } = useWeb3React();
 

@@ -5,6 +5,7 @@ import { formatEther } from '@ethersproject/units';
 import { useEagerConnect, useInactiveListener } from '../hooks/connect';
 
 const Wallet = () => {
+  // this hook will give you library(instance of web3.js,ethers.js) to make instance of contract, account address, chainId etc
   const {
     connector,
     library,
